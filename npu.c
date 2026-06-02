@@ -443,6 +443,10 @@ int mt76_npu_init(struct mt76_dev *dev, phys_addr_t phy_addr, int type)
 	struct airoha_npu *npu;
 	int err = 0;
 
+	/* Disable NPU offloading unless MT7992 */
+	if (!is_mt7992(dev))
+		return 0;
+
 	mutex_lock(&dev->mutex);
 
 	npu = airoha_npu_get(dev->dev);
